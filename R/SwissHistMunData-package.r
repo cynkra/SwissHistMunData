@@ -6,10 +6,10 @@
 NULL
 
 #' Canton data
-"canton"
+"cantons"
 
-#' District data
-"district"
+#' District mutation data
+"district_mutations"
 
-#' Municipality data
-"municipality"
+#' Municipality mutation data
+"municipality_mutations"
