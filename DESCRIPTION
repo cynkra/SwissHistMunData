@@ -1,11 +1,15 @@
 Encoding: UTF-8
 Package: SwissHistMunData
 Title: Historicized Swiss Municipalities
-Version: 0.0-1
+Version: 0.0-2
 Date: 2016-03-31
-Authors@R: "Kirill Müller <krlmlr+r@mailbox.org> [aut, cre]"
+Authors@R: c(
+    person("Kirill", "Müller", , "krlmlr+r@mailbox.org", c("aut", "cre")),
+    person("Swiss Federal Statistical Office (SFSO), Swiss Statistics Web site", role = "cph")
+    )
 Description: Contains historicized municipality data for Switzerland from 1960
-    onwards.
+    onwards, from the "Historisiertes Gemeindeverzeichnis" of the Swiss
+    Federal Statistical Office.
 Depends: R (>= 2.10)
 Imports: tibble
 Suggests:

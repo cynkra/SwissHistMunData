@@ -1,9 +1,9 @@
-#' SwissHistMunData.
-#'
-#' @name SwissHistMunData
-#' @docType package
 #' @importFrom tibble tibble
-NULL
+#' @examples
+#' cantons
+#' district_mutations
+#' municipality_mutations
+"_PACKAGE"
 
 #' Canton data
 "cantons"
