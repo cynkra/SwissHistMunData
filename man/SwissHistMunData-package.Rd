@@ -7,7 +7,8 @@
 \title{Historicized Swiss Municipalities}
 \description{
 Contains historicized municipality data for Switzerland from 1960
-onwards.
+onwards, from the "Historisiertes Gemeindeverzeichnis" of the Swiss
+Federal Statistical Office.
 }
 \examples{
 cantons
