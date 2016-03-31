@@ -6,9 +6,10 @@ Authors@R: "Kirill Müller <krlmlr+r@mailbox.org> [aut, cre]"
 Description: Contains historicized municipality data for Switzerland from 1960
     onwards.
 Depends: R (>= 2.10)
-License: GPL-3
-LazyData: true
+Imports: tibble
 Suggests:
     testthat,
     logging
+License: GPL-3
+LazyData: true
 RoxygenNote: 5.0.1

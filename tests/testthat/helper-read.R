@@ -93,7 +93,7 @@
     # Last column is compulsory
     stopifnot(!is.na(dat[, tail(t$colnames, 1)]))
 
-    dat
+    tibble::as_data_frame(dat)
   })
 
   l
