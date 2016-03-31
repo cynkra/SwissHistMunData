@@ -9,5 +9,6 @@ Depends: R (>= 2.10)
 License: GPL-3
 LazyData: true
 Suggests:
-    testthat
+    testthat,
+    logging
 RoxygenNote: 5.0.1
