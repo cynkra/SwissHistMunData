@@ -1,6 +1,12 @@
 context("up-to-date")
 
 test_that("data is up-to-date", {
+  pkg_path <- system.file(package = .packageName)
+  data_path <- file.path(pkg_path, "data")
+  if (all(Sys.time() - file.info(dir(data_path, full.names = TRUE))$mtime <
+          as.difftime(1, units = "days")))
+    skip("checked today")
+
   data <- swcReadData()
 
   expect_error({
@@ -13,8 +19,6 @@ test_that("data is up-to-date", {
   district_mutations <- data$district
   municipality_mutations <- data$municipality
 
-  pkg_path <- system.file(package = .packageName)
-  data_path <- file.path(pkg_path, "data")
   devtools::use_data(pkg = pkg_path, cantons, district_mutations,
                      municipality_mutations, overwrite = TRUE)
 })
