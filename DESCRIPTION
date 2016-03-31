@@ -1,11 +1,11 @@
 Encoding: UTF-8
 Package: SwissHistMunData
-Title: What the package does (one line)
+Title: Historicized Swiss Municipalities
 Version: 0.0-0
 Authors@R: "Kirill Müller <krlmlr+r@mailbox.org> [aut, cre]"
-Description: What the package does (one paragraph)
-Depends:
-    R (>= 3.1.1)
+Description: Contains historicized municipality data for Switzerland from 1960
+    onwards.
+Depends: R (>= 2.10)
 License: GPL-3
 LazyData: true
 Suggests:
