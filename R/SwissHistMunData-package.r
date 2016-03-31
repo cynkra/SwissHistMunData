@@ -1,9 +1,5 @@
-#' SwissHistMunData.
-#'
-#' @name SwissHistMunData
-#' @docType package
 #' @importFrom tibble tibble
-NULL
+"_PACKAGE"
 
 #' Canton data
 "cantons"
