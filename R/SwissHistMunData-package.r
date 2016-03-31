@@ -1,4 +1,8 @@
 #' @importFrom tibble tibble
+#' @examples
+#' cantons
+#' district_mutations
+#' municipality_mutations
 "_PACKAGE"
 
 #' Canton data

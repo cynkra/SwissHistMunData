@@ -9,4 +9,9 @@
 Contains historicized municipality data for Switzerland from 1960
 onwards.
 }
+\examples{
+cantons
+district_mutations
+municipality_mutations
+}
 
