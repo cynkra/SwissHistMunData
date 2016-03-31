@@ -87,6 +87,9 @@
     logging::logdebug('Integer names: %s', integer.names)
     for (n in integer.names) dat[, n] <- as.integer(dat[, n])
 
+    character.names <- names(dat)[vapply(dat, is.character, logical(1))]
+    for (n in character.names) Encoding(dat[, n]) <- "UTF-8"
+
     # Last column is compulsory
     stopifnot(!is.na(dat[, tail(t$colnames, 1)]))
 
