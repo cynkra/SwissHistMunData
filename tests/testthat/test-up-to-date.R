@@ -15,7 +15,6 @@ test_that("data is up-to-date", {
   municipality_mutations <- data$municipality
 
   old <- usethis::proj_set(pkg_path)
-  on.exit(usethis::proj_set(old))
 
   usethis::use_data(
     cantons, district_mutations, municipality_mutations,
