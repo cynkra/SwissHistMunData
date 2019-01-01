@@ -14,8 +14,11 @@ test_that("data is up-to-date", {
   district_mutations <- data$district
   municipality_mutations <- data$municipality
 
-  usethis::use_data(
-    cantons, district_mutations, municipality_mutations,
-    overwrite = TRUE
+  usethis::with_project(
+    pkg_path,
+    usethis::use_data(
+      cantons, district_mutations, municipality_mutations,
+      overwrite = TRUE
+    )
   )
 })
