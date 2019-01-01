@@ -8,9 +8,9 @@ swcReadData <- function() {
 
   unzip.dir.name <- tempfile()
   logging::logdebug(unzip.dir.name)
-  on.exit(unlink(unzip.dir.name, recursive = T), add = TRUE)
+  on.exit(unlink(unzip.dir.name, recursive = TRUE), add = TRUE)
 
-  file.list <- unzip(zip.file.name, list = T)
+  file.list <- unzip(zip.file.name, list = TRUE)
   unzip(zip.file.name, exdir = unzip.dir.name)
 
   # Reading using unz() and recoding "on the fly"
@@ -76,19 +76,19 @@ swcReadData <- function() {
   l <- lapply(X = ft, FUN = function(t) {
     logging::logdebug("Parsing data set: %s", t$n)
 
-    fname <- grep(paste0("_", t$n, "(?:_.*)?[.]txt"), file.list$Name, value = T)
+    fname <- grep(paste0("_", t$n, "(?:_.*)?[.]txt"), file.list$Name, value = TRUE)
     fpath <- file.path(unzip.dir.name, fname)
     dat <- read.table(fpath, sep = "\t", quote = "", col.names = t$colnames, fileEncoding = "ISO8859-15", stringsAsFactors = F)
 
-    date.names <- grep("Date", names(dat), value = T)
+    date.names <- grep("Date", names(dat), value = TRUE)
     logging::logdebug("Date names: %s", date.names)
     for (n in date.names) dat[, n] <- as.Date(dat[, n], format = "%d.%m.%Y")
 
-    mode.names <- grep("Mode", names(dat), value = T)
+    mode.names <- grep("Mode", names(dat), value = TRUE)
     logging::logdebug("Mode names: %s", mode.names)
     for (n in mode.names) dat[, n] <- factor(dat[, n], levels = names(codes), labels = codes)
 
-    integer.names <- grep("Id|Number", names(dat), value = T)
+    integer.names <- grep("Id|Number", names(dat), value = TRUE)
     logging::logdebug("Integer names: %s", integer.names)
     for (n in integer.names) dat[, n] <- as.integer(dat[, n])
 
