@@ -1,5 +1,5 @@
 swcReadData <- function() {
-  RECORD_HIST_URL <- 'http://www.bfs.admin.ch/bfs/portal/de/index/infothek/nomenklaturen/blank/blank/gem_liste/02.Document.96666.zip'
+  RECORD_HIST_URL <- 'https://www.bfs.admin.ch/bfsstatic/dam/assets/4924501/master'
   zip.file.name <- tempfile(fileext='.zip')
   logging::logdebug(zip.file.name)
   on.exit(unlink(zip.file.name), add=TRUE)
