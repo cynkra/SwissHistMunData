@@ -93,7 +93,7 @@ swcReadData <- function() {
     # Last column is compulsory
     stopifnot(!is.na(dat[, tail(t$colnames, 1)]))
 
-    tibble::as_data_frame(dat)
+    tibble::as_tibble(dat)
   })
 
   l
