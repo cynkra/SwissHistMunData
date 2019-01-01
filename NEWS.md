@@ -1,3 +1,9 @@
+# SwissHistMunData 0.0.2.9001
+
+- Fix test.
+- Update data to 2019-01.
+
+
 # SwissHistMunData 0.0.2.9000
 
 - Use tic.
