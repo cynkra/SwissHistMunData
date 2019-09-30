@@ -1,3 +1,6 @@
+#' Download municipality mutation data
+#'
+#' @export
 swcReadData <- function() {
   RECORD_HIST_URL <- "https://www.bfs.admin.ch/bfsstatic/dam/assets/6986905/master"
   zip.file.name <- tempfile(fileext = ".zip")
@@ -103,3 +106,21 @@ swcReadData <- function() {
 
   l
 }
+
+#' Overwrite the mutation package-data
+#'
+#' @export
+overwrite_data <- function() {
+
+  data <- SwissHistMunData::swcReadData()
+
+  cantons <- data$canton
+  district_mutations <- data$district
+  municipality_mutations <- data$municipality
+
+  usethis::use_data(cantons, district_mutations, municipality_mutations, overwrite = TRUE)
+}
+
+
+
+
