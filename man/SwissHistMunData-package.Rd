@@ -4,15 +4,23 @@
 \name{SwissHistMunData-package}
 \alias{SwissHistMunData}
 \alias{SwissHistMunData-package}
-\title{Historicized Swiss Municipalities}
+\title{SwissHistMunData: Historicized Swiss Municipalities}
 \description{
-Contains historicized municipality data for Switzerland from 1960
-onwards, from the "Historisiertes Gemeindeverzeichnis" of the Swiss
-Federal Statistical Office.
+Contains historicized municipality data for
+    Switzerland from 1960 onwards, from the "Historisiertes
+    Gemeindeverzeichnis" of the Swiss Federal Statistical Office.
 }
 \examples{
 cantons
 district_mutations
 municipality_mutations
 }
+\author{
+\strong{Maintainer}: Kirill Müller \email{krlmlr+r@mailbox.org}
 
+Other contributors:
+\itemize{
+  \item Swiss Federal Statistical Office (SFSO), Swiss Statistics Web site [copyright holder]
+}
+
+}
