@@ -12,4 +12,3 @@ cantons
 Canton data
 }
 \keyword{datasets}
-

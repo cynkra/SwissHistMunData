@@ -4,7 +4,7 @@
 \name{municipality_mutations}
 \alias{municipality_mutations}
 \title{Municipality mutation data}
-\format{An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) with 5615 rows and 15 columns.}
+\format{An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) with 5790 rows and 15 columns.}
 \usage{
 municipality_mutations
 }
@@ -12,4 +12,3 @@ municipality_mutations
 Municipality mutation data
 }
 \keyword{datasets}
-
