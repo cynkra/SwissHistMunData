@@ -154,7 +154,12 @@ check_past_changes <- function() {
     nrow(past_municipality) == nrow(SwissHistMunData::municipality_mutations)) {
     return(TRUE)
   } else {
-    #print("Changes in the data history were made. Check if those changes are correct.")
+    from <- sprintf("<sendmailR@\\%s>", Sys.info()[4])
+    to <- "<thomas@cynkra.com>"
+    subject <- "SwissHistMunData changes in past data"
+    body <- "Changes were made in the data history. Check if those changes are correct."
+    sendmail(from, to, subject, body,
+             control=list(smtpServer="ASPMX.L.GOOGLE.COM"))
     return(FALSE)
   }
 }
