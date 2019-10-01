@@ -111,7 +111,6 @@ swcReadData <- function() {
 #'
 #' @export
 overwrite_data <- function() {
-
   data <- SwissHistMunData::swcReadData()
 
   cantons <- data$canton
@@ -122,5 +121,17 @@ overwrite_data <- function() {
 }
 
 
+#' check if new data is identical to old data
+#'
+#' @export
+check_data <- function() {
+  data <- SwissHistMunData::swcReadData()
 
-
+  if (!identical(data$canton, cantons) |
+    !identical(data$district, district_mutations) |
+    !identical(data$municipality, municipality_mutations)) {
+    return(TRUE)
+  } else {
+    return(FALSE)
+  }
+}
