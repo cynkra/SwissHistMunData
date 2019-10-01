@@ -1,4 +1,14 @@
-add_package_checks()
+get_stage("install") %>%
+  add_step(step_install_github("krlmlr/SwissHistMunData")) %>%
+  add_step(step_install_deps())
+
+if (SwissHistMunData::check_data() && SwissHistMunData::check_past_changes()) {
+  get_stage("script") %>%
+    add_step(step_run_code(SwissHistMunData::overwrite_data())) %>%
+    add_step(step_run_code(desc::desc_bump_version('dev')))
+}
+
+do_package_checks()
 
 if (Sys.getenv("id_rsa") != "" && !ci()$is_tag()) {
   # pkgdown documentation can be built optionally. Other example criteria:
@@ -12,4 +22,12 @@ if (Sys.getenv("id_rsa") != "" && !ci()$is_tag()) {
   get_stage("deploy") %>%
     add_step(step_build_pkgdown()) %>%
     add_step(step_push_deploy(path = "docs", branch = "gh-pages"))
+}
+
+if (SwissHistMunData::check_data() && SwissHistMunData::check_past_changes()) {
+  get_stage("before_deploy") %>%
+    add_step(step_setup_ssh())
+
+  get_stage("deploy") %>%
+    add_step(step_push_deploy(path = "data", commit_message = "New Mutation Data added and version bumped."))
 }
