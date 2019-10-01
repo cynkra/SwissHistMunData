@@ -127,11 +127,34 @@ overwrite_data <- function() {
 check_data <- function() {
   data <- SwissHistMunData::swcReadData()
 
-  if (!identical(data$canton, cantons) |
-    !identical(data$district, district_mutations) |
-    !identical(data$municipality, municipality_mutations)) {
+  if (!identical(data$canton, SwissHistMunData::cantons) |
+    !identical(data$district, SwissHistMunData::district_mutations) |
+    !identical(data$municipality, SwissHistMunData::municipality_mutations)) {
     return(TRUE)
   } else {
+    return(FALSE)
+  }
+}
+
+
+#' check if there were no changes in the old data
+#'
+#' @export
+check_past_changes <- function() {
+  data <- SwissHistMunData::swcReadData()
+
+  past_canton <- dplyr::inner_join(data$canton, SwissHistMunData::cantons)
+
+  past_district <- dplyr::inner_join(data$district, SwissHistMunData::district_mutations)
+
+  past_municipality <- dplyr::inner_join(data$municipality, SwissHistMunData::municipality_mutations)
+
+  if (nrow(past_canton) == nrow(SwissHistMunData::cantons) &
+    nrow(past_district) == nrow(SwissHistMunData::district_mutations) &
+    nrow(past_municipality) == nrow(SwissHistMunData::municipality_mutations)) {
+    return(TRUE)
+  } else {
+    #print("Changes in the data history were made. Check if those changes are correct.")
     return(FALSE)
   }
 }
