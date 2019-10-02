@@ -1,6 +1,3 @@
-get_stage("before_install") %>%
-  add_step(step_install_github("krlmlr/SwissHistMunData"))
-
 get_stage("install") %>%
   add_step(step_install_cran("sendmailR"))
 
