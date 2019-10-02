@@ -1,4 +1,4 @@
-get_stage("before_build") %>%
+get_stage("before_script") %>%
   add_code_step({
     remotes::install_local(".")
   })
