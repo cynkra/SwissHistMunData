@@ -1,7 +1,8 @@
+get_stage("before_install") %>%
+  add_step(step_install_github("krlmlr/SwissHistMunData"))
+
 get_stage("install") %>%
-  add_step(step_install_github("krlmlr/SwissHistMunData")) %>%
-  add_step(step_install_cran("sendmailR")) %>%
-  add_step(step_install_deps())
+  add_step(step_install_cran("sendmailR"))
 
 if (SwissHistMunData::check_data() && SwissHistMunData::check_past_changes()) {
   get_stage("script") %>%
