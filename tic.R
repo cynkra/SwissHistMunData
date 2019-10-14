@@ -2,7 +2,8 @@ do_package_checks()
 
 if (ci_has_env("id_rsa") && !ci_is_tag()) {
   get_stage("install") %>%
-    add_step(step_install_cran("desc"))
+    add_step(step_install_cran("desc")) %>%
+    add_step(step_install_cran("dplyr")) %>%
 
   # pkgdown documentation can be built optionally. Other example criteria:
   # - `inherits(ci(), "TravisCI")`: Only for Travis CI
