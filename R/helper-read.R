@@ -153,13 +153,33 @@ check_past_changes <- function() {
     nrow(past_district) == nrow(SwissHistMunData::district_mutations) &
     nrow(past_municipality) == nrow(SwissHistMunData::municipality_mutations)) {
     return(TRUE)
-  } else {
-    from <- sprintf("<sendmailR@\\%s>", Sys.info()[4])
-    to <- "<thomas@cynkra.com>"
-    subject <- "SwissHistMunData changes in past data"
-    body <- "Changes were made in the data history. Check if those changes are correct."
-    sendmail(from, to, subject, body,
-             control=list(smtpServer="ASPMX.L.GOOGLE.COM"))
-    return(FALSE)
   }
 }
+
+
+#' download latest municipality inventory
+#'
+#' @export
+download_mun_inventory <- function() {
+
+  Mun_inventory_URL <- "https://www.bfs.admin.ch/bfsstatic/dam/assets/6986904/master"
+
+  zip.file.name <- tempfile(fileext = ".xlsx")
+  logging::logdebug(zip.file.name)
+
+  on.exit(unlink(zip.file.name), add = TRUE)
+
+  download.file(Mun_inventory_URL, zip.file.name, quiet = TRUE, mode="wb")
+
+  data <- readxl::read_excel(zip.file.name, sheet = 2)
+
+  names(data) <- tolower(names(data))
+
+  data
+
+}
+
+
+
+
+
