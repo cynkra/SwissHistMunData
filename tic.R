@@ -1,20 +1,9 @@
-get_stage("before_script") %>%
-  add_code_step({
-    remotes::install_local(".")
-  })
-
-get_stage("install") %>%
-  add_step(step_install_cran("sendmailR"))
-
-if (SwissHistMunData::check_data() && SwissHistMunData::check_past_changes()) {
-  get_stage("script") %>%
-    add_step(step_run_code(SwissHistMunData::overwrite_data())) %>%
-    add_step(step_run_code(desc::desc_bump_version('dev')))
-}
-
 do_package_checks()
 
-if (Sys.getenv("id_rsa") != "" && !ci()$is_tag()) {
+if (ci_has_env("id_rsa") && !ci_is_tag()) {
+  get_stage("install") %>%
+    add_step(step_install_cran("desc"))
+
   # pkgdown documentation can be built optionally. Other example criteria:
   # - `inherits(ci(), "TravisCI")`: Only for Travis CI
   # - `ci()$is_tag()`: Only for tags, not for branches
@@ -26,12 +15,13 @@ if (Sys.getenv("id_rsa") != "" && !ci()$is_tag()) {
   get_stage("deploy") %>%
     add_step(step_build_pkgdown()) %>%
     add_step(step_push_deploy(path = "docs", branch = "gh-pages"))
-}
 
-if (SwissHistMunData::check_data() && SwissHistMunData::check_past_changes()) {
-  get_stage("before_deploy") %>%
-    add_step(step_setup_ssh())
-
-  get_stage("deploy") %>%
-    add_step(step_push_deploy(path = "data", commit_message = "New Mutation Data added and version bumped."))
+  if (ci_get_branch() == "master") {
+    get_stage("deploy") %>%
+      add_step(step_run_code(source("data-raw/update-data.R", echo = TRUE))) %>%
+      add_step(step_push_deploy(
+        path = c("DESCRIPTION", "data"),
+        commit_message = "New Mutation Data added and version bumped.")
+      )
+  }
 }
