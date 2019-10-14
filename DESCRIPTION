@@ -21,7 +21,8 @@ Suggests:
     logging (>= 0.8-104),
     testthat (>= 2.0.1),
     usethis (>= 1.4.0),
-    dplyr
+    dplyr,
+    readxl
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 6.1.99.9001
