@@ -2,6 +2,7 @@
 
 export(check_data)
 export(check_past_changes)
+export(download_mun_inventory)
 export(overwrite_data)
 export(swcReadData)
 importFrom(tibble,tibble)
