@@ -1,10 +1,11 @@
 do_package_checks()
 
-if (ci_has_env("id_rsa") && !ci_is_tag()) {
-  # get_stage("install") %>%
-  #   add_step(step_install_cran("desc")) %>%
-  #   add_step(step_install_cran("dplyr")) %>%
-  #   add_step(step_install_cran("pkgload"))
+if (!ci_has_env("id_rsa") && !ci_is_tag()) {
+
+  get_stage("install") %>%
+    add_step(step_install_cran("desc")) %>%
+    add_step(step_install_cran("dplyr")) %>%
+    add_step(step_install_cran("pkgload"))
 
   # pkgdown documentation can be built optionally. Other example criteria:
   # - `inherits(ci(), "TravisCI")`: Only for Travis CI
@@ -22,7 +23,7 @@ if (ci_has_env("id_rsa") && !ci_is_tag()) {
     get_stage("deploy") %>%
       add_step(step_run_code(source("data-raw/update-data.R", echo = TRUE))) %>%
       add_step(step_push_deploy(
-        path = c("DESCRIPTION", "data"),
+        commit_paths = c("DESCRIPTION", "data"),
         commit_message = "New Mutation Data added and version bumped.")
       )
   }
