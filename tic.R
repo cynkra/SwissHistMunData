@@ -1,6 +1,6 @@
 do_package_checks()
 
-if (!ci_has_env("id_rsa") && !ci_is_tag()) {
+if (ci_has_env("id_rsa") && !ci_is_tag()) {
 
   get_stage("install") %>%
     add_step(step_install_cran("desc")) %>%
