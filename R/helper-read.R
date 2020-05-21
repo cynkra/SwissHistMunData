@@ -127,13 +127,12 @@ overwrite_data <- function() {
 check_data <- function() {
   data <- SwissHistMunData::swcReadData()
 
-  if (!identical(data$canton, SwissHistMunData::cantons) |
-    !identical(data$district, SwissHistMunData::district_mutations) |
-    !identical(data$municipality, SwissHistMunData::municipality_mutations)) {
-    return(TRUE)
-  } else {
-    return(FALSE)
-  }
+  unchanged <-
+    identical(data$canton, SwissHistMunData::cantons) &&
+    identical(data$district, SwissHistMunData::district_mutations) &&
+    identical(data$municipality, SwissHistMunData::municipality_mutations)
+
+  !unchanged
 }
 
 
