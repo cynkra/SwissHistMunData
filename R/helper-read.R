@@ -148,12 +148,39 @@ check_past_changes <- function() {
 
   past_municipality <- dplyr::inner_join(data$municipality, SwissHistMunData::municipality_mutations)
 
-  if (nrow(past_canton) == nrow(SwissHistMunData::cantons) &
-    nrow(past_district) == nrow(SwissHistMunData::district_mutations) &
-    nrow(past_municipality) == nrow(SwissHistMunData::municipality_mutations)) {
-    return(TRUE)
-  }
+  unchanged <-
+    nrow(past_canton) == nrow(SwissHistMunData::cantons) &&
+    nrow(past_district) == nrow(SwissHistMunData::district_mutations) &&
+    nrow(past_municipality) == nrow(SwissHistMunData::municipality_mutations)
+
+  unchanged
 }
+
+
+daff_canton <- function() {
+  stopifnot(requireNamespace("daff", quietly = TRUE))
+
+  data <- SwissHistMunData::swcReadData()
+
+  daff::render_diff(daff::diff_data(SwissHistMunData::cantons, data$canton))
+}
+
+daff_district <- function() {
+  stopifnot(requireNamespace("daff", quietly = TRUE))
+
+  data <- SwissHistMunData::swcReadData()
+
+  daff::render_diff(daff::diff_data(SwissHistMunData::district_mutations, data$district))
+}
+
+daff_municipality_mutations <- function() {
+  stopifnot(requireNamespace("daff", quietly = TRUE))
+
+  data <- SwissHistMunData::swcReadData()
+
+  daff::render_diff(daff::diff_data(SwissHistMunData::municipality_mutations, data$municipality))
+}
+
 
 
 #' download latest municipality inventory

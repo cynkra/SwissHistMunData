@@ -3,7 +3,7 @@ pkgload::load_all()
 if (check_data()) {
   if (check_past_changes()) {
     if (interactive()) {
-      warning("Past data changed, please double-check carefully!")
+      warning("Past data changed, please double-check carefully with `daff_municipality_mutations()` and other `daff_*()` helpers!")
     } else {
       stop("Past data changed, please double-check manually and run data-raw/update-data.R")
     }
