@@ -2,7 +2,7 @@
 #'
 #' @export
 swcReadData <- function() {
-  RECORD_HIST_URL <- "https://www.bfs.admin.ch/bfsstatic/dam/assets/6986905/master"
+  RECORD_HIST_URL <- "https://www.bfs.admin.ch/bfsstatic/dam/assets/11467407/master"
   zip.file.name <- tempfile(fileext = ".zip")
   logging::logdebug(zip.file.name)
   on.exit(unlink(zip.file.name), add = TRUE)
