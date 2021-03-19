@@ -81,7 +81,11 @@ swcReadData <- function() {
 
     fname <- grep(paste0("_", t$n, "(?:_.*)?[.]txt"), file.list$Name, value = TRUE)
     fpath <- file.path(unzip.dir.name, fname)
-    dat <- read.table(fpath, sep = "\t", quote = "", col.names = t$colnames, fileEncoding = "ISO8859-15", stringsAsFactors = F)
+    dat <- read.table(
+      fpath,
+      sep = "\t", quote = "", col.names = t$colnames,
+      fileEncoding = "ISO8859-15", stringsAsFactors = FALSE
+    )
 
     date.names <- grep("Date", names(dat), value = TRUE)
     logging::logdebug("Date names: %s", date.names)
@@ -129,8 +133,8 @@ check_data <- function() {
 
   unchanged <-
     identical(data$canton, SwissHistMunData::cantons) &&
-    identical(data$district, SwissHistMunData::district_mutations) &&
-    identical(data$municipality, SwissHistMunData::municipality_mutations)
+      identical(data$district, SwissHistMunData::district_mutations) &&
+      identical(data$municipality, SwissHistMunData::municipality_mutations)
 
   !unchanged
 }
@@ -146,12 +150,15 @@ check_past_changes <- function() {
 
   past_district <- dplyr::inner_join(data$district, SwissHistMunData::district_mutations)
 
-  past_municipality <- dplyr::inner_join(data$municipality, SwissHistMunData::municipality_mutations)
+  past_municipality <- dplyr::inner_join(
+    data$municipality,
+    SwissHistMunData::municipality_mutations
+  )
 
   unchanged <-
     nrow(past_canton) == nrow(SwissHistMunData::cantons) &&
-    nrow(past_district) == nrow(SwissHistMunData::district_mutations) &&
-    nrow(past_municipality) == nrow(SwissHistMunData::municipality_mutations)
+      nrow(past_district) == nrow(SwissHistMunData::district_mutations) &&
+      nrow(past_municipality) == nrow(SwissHistMunData::municipality_mutations)
 
   unchanged
 }
@@ -187,7 +194,6 @@ daff_municipality_mutations <- function() {
 #'
 #' @export
 download_mun_inventory <- function() {
-
   Mun_inventory_URL <- "https://www.bfs.admin.ch/bfsstatic/dam/assets/6986904/master"
 
   zip.file.name <- tempfile(fileext = ".xlsx")
@@ -195,17 +201,11 @@ download_mun_inventory <- function() {
 
   on.exit(unlink(zip.file.name), add = TRUE)
 
-  download.file(Mun_inventory_URL, zip.file.name, quiet = TRUE, mode="wb")
+  download.file(Mun_inventory_URL, zip.file.name, quiet = TRUE, mode = "wb")
 
   data <- readxl::read_excel(zip.file.name, sheet = 2)
 
   names(data) <- tolower(names(data))
 
   data
-
 }
-
-
-
-
-
