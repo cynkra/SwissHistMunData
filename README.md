@@ -1,10 +1,13 @@
 # SwissHistMunData
-
 <!-- badges: start -->
 [![tic](https://github.com/krlmlr/SwissHistMunData/workflows/tic/badge.svg?branch=master)](https://github.com/krlmlr/SwissHistMunData/actions)
 <!-- badges: end -->
 
+This repository is archived due to an insert of its content into the munch repository/package.
+
 Historicized Swiss municipalities.
+
+
 
 ---
 
