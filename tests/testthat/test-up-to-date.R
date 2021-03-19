@@ -6,7 +6,7 @@ test_that("data is up-to-date", {
   pkg_path <- system.file(package = "SwissHistMunData")
   data_path <- file.path(pkg_path, "data")
 
-  data <- swcReadData()
+  data <- swc_read_data()
 
   expect_identical(cantons, data$canton)
   expect_identical(district_mutations, data$district)

@@ -1,7 +1,7 @@
 #' Download municipality mutation data
 #'
 #' @export
-swcReadData <- function() {
+swc_read_data <- function() {
   record_hist_url <- "https://www.bfs.admin.ch/bfsstatic/dam/assets/11467407/master"
   zip_file_name <- tempfile(fileext = ".zip")
   logging::logdebug(zip_file_name)
@@ -115,7 +115,7 @@ swcReadData <- function() {
 #'
 #' @export
 overwrite_data <- function() {
-  data <- SwissHistMunData::swcReadData()
+  data <- SwissHistMunData::swc_read_data()
 
   cantons <- data$canton
   district_mutations <- data$district
@@ -129,7 +129,7 @@ overwrite_data <- function() {
 #'
 #' @export
 check_data <- function() {
-  data <- SwissHistMunData::swcReadData()
+  data <- SwissHistMunData::swc_read_data()
 
   unchanged <-
     identical(data$canton, SwissHistMunData::cantons) &&
@@ -144,7 +144,7 @@ check_data <- function() {
 #'
 #' @export
 check_past_changes <- function() {
-  data <- SwissHistMunData::swcReadData()
+  data <- SwissHistMunData::swc_read_data()
 
   past_canton <- dplyr::inner_join(data$canton, SwissHistMunData::cantons)
 
@@ -167,7 +167,7 @@ check_past_changes <- function() {
 daff_canton <- function() {
   stopifnot(requireNamespace("daff", quietly = TRUE))
 
-  data <- SwissHistMunData::swcReadData()
+  data <- SwissHistMunData::swc_read_data()
 
   daff::render_diff(daff::diff_data(SwissHistMunData::cantons, data$canton))
 }
@@ -175,7 +175,7 @@ daff_canton <- function() {
 daff_district <- function() {
   stopifnot(requireNamespace("daff", quietly = TRUE))
 
-  data <- SwissHistMunData::swcReadData()
+  data <- SwissHistMunData::swc_read_data()
 
   daff::render_diff(daff::diff_data(SwissHistMunData::district_mutations, data$district))
 }
@@ -183,7 +183,7 @@ daff_district <- function() {
 daff_municipality_mutations <- function() {
   stopifnot(requireNamespace("daff", quietly = TRUE))
 
-  data <- SwissHistMunData::swcReadData()
+  data <- SwissHistMunData::swc_read_data()
 
   daff::render_diff(daff::diff_data(SwissHistMunData::municipality_mutations, data$municipality))
 }
