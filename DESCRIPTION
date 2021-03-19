@@ -1,6 +1,6 @@
 Package: SwissHistMunData
 Title: Historicized Swiss Municipalities
-Version: 0.0.2.9003
+Version: 0.0.2.9002
 Date: 2019-01-01
 Authors@R: 
     c(person(given = "Kirill",
