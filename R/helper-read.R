@@ -2,19 +2,19 @@
 #'
 #' @export
 swcReadData <- function() {
-  RECORD_HIST_URL <- "https://www.bfs.admin.ch/bfsstatic/dam/assets/11467407/master"
-  zip.file.name <- tempfile(fileext = ".zip")
-  logging::logdebug(zip.file.name)
-  on.exit(unlink(zip.file.name), add = TRUE)
+  record_hist_url <- "https://www.bfs.admin.ch/bfsstatic/dam/assets/11467407/master"
+  zip_file_name <- tempfile(fileext = ".zip")
+  logging::logdebug(zip_file_name)
+  on.exit(unlink(zip_file_name), add = TRUE)
 
-  download.file(RECORD_HIST_URL, zip.file.name, quiet = TRUE)
+  download.file(record_hist_url, zip_file_name, quiet = TRUE)
 
-  unzip.dir.name <- tempfile()
-  logging::logdebug(unzip.dir.name)
-  on.exit(unlink(unzip.dir.name, recursive = TRUE), add = TRUE)
+  unzip_dir_name <- tempfile()
+  logging::logdebug(unzip_dir_name)
+  on.exit(unlink(unzip_dir_name, recursive = TRUE), add = TRUE)
 
-  file.list <- unzip(zip.file.name, list = TRUE)
-  unzip(zip.file.name, exdir = unzip.dir.name)
+  file.list <- unzip(zip_file_name, list = TRUE)
+  unzip(zip_file_name, exdir = unzip_dir_name)
 
   # Reading using unz() and recoding "on the fly"
   # didn't work for some reason
@@ -80,7 +80,7 @@ swcReadData <- function() {
     logging::logdebug("Parsing data set: %s", t$n)
 
     fname <- grep(paste0("_", t$n, "(?:_.*)?[.]txt"), file.list$Name, value = TRUE)
-    fpath <- file.path(unzip.dir.name, fname)
+    fpath <- file.path(unzip_dir_name, fname)
     dat <- read.table(
       fpath,
       sep = "\t", quote = "", col.names = t$colnames,
@@ -194,16 +194,16 @@ daff_municipality_mutations <- function() {
 #'
 #' @export
 download_mun_inventory <- function() {
-  Mun_inventory_URL <- "https://www.bfs.admin.ch/bfsstatic/dam/assets/6986904/master"
+  mun_inventory_url <- "https://www.bfs.admin.ch/bfsstatic/dam/assets/6986904/master"
 
-  zip.file.name <- tempfile(fileext = ".xlsx")
-  logging::logdebug(zip.file.name)
+  zip_file_name <- tempfile(fileext = ".xlsx")
+  logging::logdebug(zip_file_name)
 
-  on.exit(unlink(zip.file.name), add = TRUE)
+  on.exit(unlink(zip_file_name), add = TRUE)
 
-  download.file(Mun_inventory_URL, zip.file.name, quiet = TRUE, mode = "wb")
+  download.file(mun_inventory_url, zip_file_name, quiet = TRUE, mode = "wb")
 
-  data <- readxl::read_excel(zip.file.name, sheet = 2)
+  data <- readxl::read_excel(zip_file_name, sheet = 2)
 
   names(data) <- tolower(names(data))
 
