@@ -3,7 +3,7 @@
 [![tic](https://github.com/krlmlr/SwissHistMunData/workflows/tic/badge.svg?branch=master)](https://github.com/krlmlr/SwissHistMunData/actions)
 <!-- badges: end -->
 
-This repository is archived due to an insert of its content into the munch repository/package.
+This repository is archived due to an insert of its content into the [munch](https://github.com/cynkra/SwissCommunes) repository.
 
 Historicized Swiss municipalities.
 
